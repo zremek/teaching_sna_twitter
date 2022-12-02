@@ -1,6 +1,9 @@
 .Rproj.user
 .Rhistory
 *.RData
+*.gephi
+*.gml
+*.xlsx
 .Ruserdata
 twitter_dev_keys.R
 /twtr_workshop-materials/*

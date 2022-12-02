@@ -116,4 +116,10 @@ top_model_pl_100_entities_mentions <-
 # 
 # 3. wszystko to samo na dużych danych
 
-save.image("top_model_100.RData")
+# save.image("top_model_100.RData")
+
+# robię TODO w pliku 02_top_model_rts
+
+
+# retweeted_status_user$id_str
+# retweeted_status_user$screen_name

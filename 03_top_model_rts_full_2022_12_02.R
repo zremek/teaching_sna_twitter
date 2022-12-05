@@ -24,13 +24,13 @@ auth_has_default()
 # Set n = Inf to download as many results as possible.
 
 top_model_pl_full <- rtweet::search_tweets(q = "#topmodel", 
-                                          n = Inf, 
-                                          type = "recent", 
-                                          retryonratelimit = TRUE, 
-                                          lang = "pl")
+                                           n = Inf, 
+                                           type = "recent", 
+                                           retryonratelimit = TRUE, 
+                                           lang = "pl")
 
 # zapisujemy .RData, obiekt z danymi może być duży i jest niepowtarzalny
-# save.image()
+# save.image("top_model_full.RData")
 
 ######### porządkujemy dane ###############
 
@@ -99,9 +99,9 @@ rts_top_model_pl_full <- rts_top_model_pl_full %>%
 # from the names of the columns.
 
 # ustawiam retweeted_status_user_screen_name jako pierwszą kolumnę
-# w Gephi jest to edge "source"
+# w Gephi jest to edge "source id"
 # user_screen_name jako drugą 
-# jest to edge "target" 
+# jest to edge "target id" 
 
 
 igr_rts_top_model_pl_full <- 
@@ -135,5 +135,23 @@ rts_top_model_pl_full %>%
   count(retweeted_status_user_screen_name, 
         user_screen_name) %>% arrange(desc(n))
 
+# 2 760 == unikalne pary == edges w Gephi 
 
 # nie są, powinny być wagi! 
+
+####### opis danych #########
+
+load("top_model_full.RData")
+
+summary(rts_top_model_pl_full)
+
+rts_top_model_pl_full %>%
+  filter(!is.na(retweeted_status_user_screen_name)) %>%
+  mutate(created_days = lubridate::floor_date(status_created_at, 
+                                              unit = "days")) %>% 
+  ggplot(aes(x = created_days)) + geom_bar()
+
+rts_top_model_pl_full %>%
+  filter(!is.na(retweeted_status_user_screen_name)) %>% dim()
+
+rts_top_model_pl_full %>% dim()

@@ -14,20 +14,27 @@ Sys.setenv(LANGUAGE = "en")
 # https://developer.twitter.com/en/products/twitter-api/academic-research 
 
 # rtweet_app(bearer_token = Bearer_Token)
-# auth_setup_default()
+auth_setup_default()
 auth_has_default()
 
-
+auth_as("default")
 
 ####### szukamy tweetów po hashtagu #########
 
+top_model_pl_5 <- rtweet::search_tweets(q = "#topmodel",
+                                           n = 5, # test 
+                                           type = "recent",
+                                           retryonratelimit = TRUE,
+                                           lang = "pl")
+
+
 # Set n = Inf to download as many results as possible.
 
-top_model_pl_full <- rtweet::search_tweets(q = "#topmodel", 
-                                           n = Inf, 
-                                           type = "recent", 
-                                           retryonratelimit = TRUE, 
-                                           lang = "pl")
+# top_model_pl_full <- rtweet::search_tweets(q = "#topmodel", 
+#                                            n = Inf, 
+#                                            type = "recent", 
+#                                            retryonratelimit = TRUE, 
+#                                            lang = "pl")
 
 # zapisujemy .RData, obiekt z danymi może być duży i jest niepowtarzalny
 # save.image("top_model_full.RData")

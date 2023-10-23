@@ -16,8 +16,19 @@ Sys.setenv(LANGUAGE = "en")
 # https://developer.twitter.com/en/products/twitter-api/academic-research 
 
 # rtweet_app(bearer_token = Bearer_Token)
-# auth_setup_default()
-auth_has_default()
+?rtweet_user()
+auth_setup_default()
+# auth_has_default()
+
+
+# puszczam nie robiąc nic poza załadowaniem paczki
+test_df <- search_tweets("#CzasRozliczenia", n = 10, 
+              include_rts = FALSE)
+
+# auth <- rtweet_app()
+# auth_as(auth)
+# auth_save(auth, "a_teaching_sna_zremek")
+# auth_as("a_teaching_sna_zremek")
 
 ## Prezydent https://twitter.com/AndrzejDuda 
 ## i Premier RP https://twitter.com/MorawieckiM 
@@ -29,6 +40,11 @@ duda_morawiecki <- rtweet::get_timeline(
   user = c("@AndrzejDuda", "@MorawieckiM"), parse = TRUE, 
   )
 
+
+# Error: Twitter API failed [403]. Check error message at https://developer.twitter.com/en/support/twitter-api/error-troubleshooting 
+# * You currently have access to a subset of Twitter API v2 endpoints and limited v1.1 endpoints (e.g. media post, oauth) only. If you need access to this endpoint, you may need a different access level. You can learn more here: https://developer.twitter.com/en/portal/product (453)
+
+
 duda_timeline_10 <- rtweet::get_timeline(
   user = pad, 
   n = 10,
@@ -37,8 +53,7 @@ duda_timeline_10 <- rtweet::get_timeline(
 )
 
 duda_retweets_1 <- rtweet::get_retweeters(duda_timeline_10$id_str[1], 
-                                           n = Inf, 
-                                          retryonratelimit = TRUE)
+                                           n = 1)
 
 
 duda_followers <- rtweet::get_followers(user = pad,
